@@ -1,8 +1,4 @@
-# ================================================
-# EDA + Logistic Regression + Random Forest (R)
-# ================================================
 
-# 1. Setup ----
 library(tidyverse)  # For data manipulation and visualization
 library(GGally)     # For advanced plotting
 library(DataExplorer) # For automated EDA
@@ -13,23 +9,23 @@ library(randomForest) # For random forest models
 library(pROC)       # For ROC curve analysis
 library(gridExtra)  
 
-# Load dataset
+
 df <- read.csv("customer_churn_dataset-testing-master.csv")
 
-# 2. Data Overview ----
+# 2. Data Overview 
 glimpse(df)
 dim(df)
 head(df)
 
-# 3. Data Preprocessing ----
+# 3. Data Preprocessing 
 df$Gender <- as.factor(df$Gender)
 df$Subscription.Type <- as.factor(df$Subscription.Type)
 df$Contract.Length <- as.factor(df$Contract.Length)
 df$Churn <- as.factor(df$Churn)
 
 # Drop CustomerID
-df <- df %>% select(-CustomerID)
-
+#df <- df %>% select(-CustomerID) 
+df <- select(df, -CustomerID)
 # Check for missing values
 sum(is.na(df))
 
@@ -134,3 +130,4 @@ head(prediction_results)
 
 # Save predictions if needed
 write.csv(prediction_results, "churn_predictions.csv", row.names = FALSE)
+
